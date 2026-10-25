@@ -45,8 +45,111 @@
 #menu>.sb,#lvsel>.sb{position:absolute;top:14px;right:14px;z-index:3}
 #hint{left:50%;transform:translateX(-50%);top:182px;padding:8px 18px;border-radius:10px;background:#060a16ee;border:1px solid #ffc247;color:#ffe9a8;font:600 15px Cinzel,serif;letter-spacing:.1em;opacity:0;transition:opacity .25s;z-index:3;text-align:center;max-width:80vw;white-space:pre}#hint.on{opacity:1}#hint.no{border-color:#ff8a7a;color:#ffd0c8;white-space:normal}#app.mimic #hint{background:#fff3dbf5;border-color:#e0a860;color:#5a2d0c}#app.mimic #hint.no{color:#b4531a}
 #app.mimic #btns{top:80px;max-width:34vw}
+
+#nm,#lb{position:absolute;inset:0;z-index:12;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;overflow:auto;text-align:center;color:#e8f1ff}
+#nm{background:linear-gradient(100deg,#ffd9a0 0%,#ffb98a 32%,#2a1648 58%,#0b2a4d 100%);z-index:13}#lb{background:linear-gradient(#0b2a4d,#1a0b33)}
+#nm.on,#lb.on{display:flex;animation:mfi .5s ease-out}
+#nm h1{margin:0;font:700 clamp(30px,5vw,56px) Cinzel,Georgia,serif;letter-spacing:.06em;color:#fff7e0;text-shadow:0 2px 14px #000b,0 0 24px #ffc247aa}#nm>p{margin:0 0 18px;color:#fff7e0;text-shadow:0 1px 8px #000b}
+.nbox{display:flex;flex-direction:column;gap:10px;width:min(90vw,340px);padding:22px;border-radius:14px;background:#0a1226ee;border:1px solid #5fd8ff;box-shadow:0 8px 30px #000a}
+.nbox label{font:700 13px Cinzel,serif;letter-spacing:.14em;color:#bfeaff}.nbox input{padding:11px 12px;border-radius:8px;border:1px solid #44557a;background:#060a16;color:#fff;font:600 16px Georgia,serif;text-align:center}.nbox input:focus{outline:2px solid #ffc247}
+.nbox button{font:700 15px Cinzel,serif;letter-spacing:.1em;padding:11px;background:linear-gradient(#ffc247,#ff9a52);color:#4a2208;border:1px solid #fff2c8}.nbox small{color:#ff9a8a;min-height:14px}
+#menu>.tb{position:absolute;top:14px;left:14px;z-index:3;display:flex;gap:8px;align-items:center;flex-wrap:wrap;max-width:60vw}#who{color:#fff7e0;text-shadow:0 1px 6px #000c;font-size:13px}
+#menu>.tb button,.lsr button{font-size:12px;padding:6px 12px}.lsr{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+#lb h2{margin:0;font:700 clamp(26px,4vw,40px) Cinzel,serif;letter-spacing:.1em;color:#ffe9a8;text-shadow:0 0 18px #ffc24788}
+#lbt,#lbl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.lbtab{font:700 13px Cinzel,serif;letter-spacing:.1em;padding:7px 18px}.lbtab.sel.mimic{background:#ffc247;color:#4a2208}.lbtab.sel.mirror{background:#2a4fa8;color:#fff;border-color:#5fd8ff}
+.lbchip{min-width:36px;padding:6px 8px}.lbchip.sel{background:#ffc247;color:#4a2208}#lbn{margin:4px 0;font:600 13px Cinzel,serif;letter-spacing:.08em;color:#bfeaff}
+#lbw{width:min(94vw,520px);max-height:48vh;overflow:auto;border:1px solid #44557a;border-radius:10px;background:#0a1226cc}#lbtab{width:100%;border-collapse:collapse;font-size:15px}
+#lbtab th{position:sticky;top:0;background:#12204a;font:700 11px Cinzel,serif;letter-spacing:.14em;color:#bfeaff;padding:8px}#lbtab td{padding:7px 10px;border-top:1px solid #22304f}#lbtab td:first-child{width:56px}#lbtab td:last-child{width:80px;font-weight:700;color:#ffe9a8}
+#lbtab tr.me td{background:#ffc24726;color:#fff;font-weight:700}.lbmsg{text-align:center;opacity:.75;padding:16px!important}#lbs{margin:2px 0;font-size:12px;opacity:.75}
+#lb .lbtab.sel.mimic,#lb .lbchip.sel{background:#ffc247!important;color:#4a2208!important;border-color:#fff2c8!important}#lb .lbtab.sel.mirror{background:#2a4fa8!important;color:#fff!important;border-color:#5fd8ff!important}
+
+/* ===== Controls: device selection + touch controller (added) ===== */
+#dv,#mtut{position:fixed;inset:0;display:none;z-index:20;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));overflow:auto;text-align:center;color:#e8f1ff;background:radial-gradient(ellipse at 50% 0%,#12315c 0%,#0a1226 55%,#04070f 100%)}
+#mtut{z-index:19;background:#03060ee6}
+#dv.on,#mtut.on{display:flex;animation:mfi .45s ease-out}
+#dv:before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 2px);width:4px;background:linear-gradient(#9fe8ff,#fff,#b48cff);box-shadow:0 0 14px 4px #4db8ff,0 0 40px 12px #508cff66;opacity:.55;animation:fl 1.6s infinite alternate;pointer-events:none}
+#dv>*{position:relative}
+#dv h1{margin:0;font:700 clamp(26px,5vw,48px) Cinzel,Georgia,serif;letter-spacing:.06em;color:#bfeaff;text-shadow:0 0 18px #2db6ff}
+#dv h2{margin:0;font:600 clamp(13px,2vw,20px) Cinzel,Georgia,serif;letter-spacing:.2em;color:#fff7e0}
+#dvx{position:absolute!important;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));display:none;padding:8px 12px}
+.dvc{display:flex;gap:clamp(14px,4vw,48px);justify-content:center;flex-wrap:wrap;width:100%;margin:6px 0}
+.dvk{width:min(92vw,380px);display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 18px 18px;border-radius:16px;text-align:center;color:#e8f1ff;background:#0a1226ee;border:1px solid #44557a;transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer;font-family:Georgia,serif}
+.dvk:hover,.dvk:focus-visible{transform:translateY(-4px);outline:none}
+.dvk.pc:hover,.dvk.pc:focus-visible{border-color:#5fd8ff;box-shadow:0 10px 40px #5fd8ff66}
+.dvk.mb:hover,.dvk.mb:focus-visible{border-color:#ffc247;box-shadow:0 10px 40px #ffc24777}
+.dvk h3{margin:2px 0 0;font:700 clamp(18px,2.4vw,24px) Cinzel,serif;letter-spacing:.1em}.dvk.pc h3{color:#bfeaff;text-shadow:0 0 12px #2db6ff}.dvk.mb h3{color:#ffe9a8;text-shadow:0 0 12px #ffc24788}
+.dvk small{font:600 11px Cinzel,serif;letter-spacing:.16em;opacity:.8}
+.dvk ul{list-style:none;margin:6px 0 0;padding:0;font-size:13px;line-height:1.55;color:#a9bad6;text-align:left}.dvk li:before{content:"◆ ";font-size:8px;color:#5fd8ff;vertical-align:2px}.dvk.mb li:before{color:#ffc247}
+.dvk .go{margin-top:8px;font:700 13px Cinzel,serif;letter-spacing:.14em;padding:9px 22px;border-radius:8px;background:linear-gradient(#1b2f66,#2a1148);border:1px solid #5fd8ff}.dvk.mb .go{background:linear-gradient(#ffc247,#ff9a52);color:#4a2208;border-color:#fff2c8}
+.rec{display:none;position:absolute;top:-10px;left:50%;transform:translateX(-50%);font:700 10px Cinzel,serif;letter-spacing:.14em;padding:3px 10px;border-radius:20px;background:#ffc247;color:#1a0b33;white-space:nowrap;font-style:normal}.dvk.rc .rec{display:block}.dvk{position:relative}
+.wasd{display:grid;grid-template-columns:repeat(3,34px);gap:4px;margin:4px 0}.wasd b{display:flex;align-items:center;justify-content:center;height:34px;border:1px solid #6a7a98;border-radius:6px;background:#1a2540;font:700 14px sans-serif;color:#bfeaff;box-shadow:0 3px 0 #0b1226}.wasd .w{grid-column:2}.wasd .a{grid-column:1;grid-row:2}.wasd .s{grid-column:2;grid-row:2}.wasd .d{grid-column:3;grid-row:2}
+.dvk.pc:hover .wasd b{animation:kp 1s infinite alternate}.dvk.pc:hover .wasd .a{animation-delay:.15s}.dvk.pc:hover .wasd .s{animation-delay:.3s}.dvk.pc:hover .wasd .d{animation-delay:.45s}@keyframes kp{to{border-color:#5fd8ff;box-shadow:0 0 12px #5fd8ff99,0 3px 0 #0b1226}}
+.ph{width:62px;height:104px;border-radius:12px;border:2px solid #8a7a58;background:#120d22;padding:5px;position:relative;margin:2px 0;box-shadow:0 0 18px #ffc24744}.ph:before{content:"";position:absolute;top:3px;left:50%;width:14px;height:3px;margin-left:-7px;border-radius:2px;background:#443}
+.ph .sc{position:absolute;inset:9px 5px 5px;border-radius:6px;background:linear-gradient(100deg,#0b2a4d,#2a1648)}.ph .mdp{position:absolute;left:5px;bottom:5px;width:22px;height:22px;border-radius:50%;border:1px solid #ffc247;background:radial-gradient(#ffc24766 30%,transparent 32%)}.ph .mdp:before,.ph .mdp:after{content:"";position:absolute;background:#ffc247;left:50%;top:50%;transform:translate(-50%,-50%)}.ph .mdp:before{width:14px;height:3px}.ph .mdp:after{width:3px;height:14px}
+.ph .mbt{position:absolute;right:6px;bottom:7px;width:15px;height:15px;border-radius:50%;background:#ffc247;box-shadow:0 0 8px #ffc247;animation:pu 1.4s infinite alternate}@keyframes pu{to{transform:scale(.8);opacity:.7}}
+.dvf{margin:0;font-size:12px;opacity:.7}
+#mtut .tc{width:min(92vw,420px);padding:22px 20px;border-radius:16px;background:#0a1226f2;border:1px solid #ffc247;box-shadow:0 10px 40px #000a;text-align:left}#mtut h3{margin:0 0 10px;text-align:center;font:700 20px Cinzel,serif;letter-spacing:.14em;color:#ffe9a8}
+#mtut ul{margin:0 0 14px;padding:0;list-style:none;font-size:14px;line-height:1.5;color:#cfe3ff}#mtut li{margin:0 0 9px}#mtut li b{color:#5fd8ff;font-family:Cinzel,serif;letter-spacing:.06em}#mtut button{display:block;margin:0 auto;font:700 14px Cinzel,serif;letter-spacing:.14em;padding:10px 26px;background:linear-gradient(#ffc247,#ff9a52);color:#4a2208;border:1px solid #fff2c8}
+#mc{display:none}
+body.mob{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none;touch-action:manipulation}
+body.mob input{-webkit-user-select:text;user-select:text}
+body.mob #app{background:#070d1a}body.mob #app.mimic{background:linear-gradient(#ffeccb,#ffd9a0)}
+body.mob #stage{flex:1 1 0;min-width:0;min-height:0;touch-action:none}
+body.mob #hud,body.mob #hud2,body.mob #app.mimic #hud2{display:none!important}
+body.mob #bS,body.mob #bU,body.mob #bR{display:none}
+body.mob #btns,body.mob #app.mimic #btns{top:max(6px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));max-width:46vw;gap:6px}body.mob #btns button{padding:6px 10px;font-size:12px;min-height:34px}
+body.mob #brand{left:max(10px,env(safe-area-inset-left));top:6px}body.mob #brand h1{font-size:clamp(18px,5vw,26px)}body.mob #brand p{display:none}body.mob #brand b{font-size:11px}
+body.mob #top,body.mob #app.mimic #mtop{font-size:10px;max-width:46vw;top:6px;max-height:64px;overflow:hidden}body.mob #top div,body.mob #mtop div{padding:5px 8px;gap:6px}body.mob #top .fig,body.mob #mtop .fig{display:none}
+body.mob kbd{font-size:0;border:0;background:none;padding:0;margin:0;min-width:0}body.mob kbd:after{content:"Tap";font:700 10px sans-serif;color:#5fd8ff}body.mob #app.mimic kbd:after{color:#c2571a}
+body.mob #info{top:62px}body.mob #hint{top:110px}
+body.mob .lab{bottom:8px;padding:5px 12px;font-size:11px}
+body.mob #mc{display:flex;position:relative;z-index:4;flex:none;align-items:flex-end;justify-content:space-between;gap:12px;padding:10px max(14px,env(safe-area-inset-right)) 8px max(14px,env(safe-area-inset-left));background:linear-gradient(#070d1a,#04070f);border-top:1px solid #26385c;touch-action:none;-webkit-user-select:none;user-select:none}
+body.mob #app.mimic #mc{background:linear-gradient(#ffeccb,#ffd9a0);border-top-color:#e0a860}
+#mc{--ps:clamp(120px,min(44vw,22vh),190px)}
+#dp{position:relative;flex:none;width:var(--ps);height:var(--ps);border-radius:50%;display:grid;grid-template:1fr 1fr 1fr/1fr 1fr 1fr;background:radial-gradient(circle,#13203d 0 30%,#0b1428 31% 100%);border:1px solid #3a4a68;box-shadow:0 0 18px #2db6ff33 inset,0 4px 14px #0008;touch-action:none}
+#dp .dk{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:calc(var(--ps)*.16);color:#9fd8ff;border-radius:10px;transition:transform .08s,background .08s,color .08s;pointer-events:none}
+#dp .dk[data-d=u]{grid-area:1/2}#dp .dk[data-d=l]{grid-area:2/1}#dp .dk[data-d=r]{grid-area:2/3}#dp .dk[data-d=d]{grid-area:3/2}#dp .dcen{grid-area:2/2;border-radius:50%;background:#1b2a4d;margin:18%;pointer-events:none}
+#dp .dk.p{background:#5fd8ff55;color:#fff;transform:scale(.88);box-shadow:0 0 14px #5fd8ffaa}
+body.mob #app.mimic #dp{background:radial-gradient(circle,#fff3dbf5 0 30%,#ffd9a0 31% 100%);border-color:#e0a860}body.mob #app.mimic #dp .dk{color:#c2571a}body.mob #app.mimic #dp .dcen{background:#ffc247}body.mob #app.mimic #dp .dk.p{background:#ff8a5c66;color:#5a2d0c}
+#ac{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+#ac button{touch-action:none;-webkit-user-select:none;user-select:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:Cinzel,serif;font-weight:700;letter-spacing:.08em;transition:transform .08s,box-shadow .08s,background .08s}
+#ac button b{font-size:inherit;display:flex}#ac button span{font-size:10px}
+#mA{width:calc(var(--ps)*.58);height:calc(var(--ps)*.58);border-radius:50%;font-size:calc(var(--ps)*.2);background:radial-gradient(circle at 35% 30%,#2a4fa8,#1b1240);border:2px solid #5fd8ff;box-shadow:0 0 16px #5fd8ff66;color:#e8f1ff}
+#app.mimic #mA .sw,#app:not(.mimic) #mA .wt{display:none!important}
+body.mob #app.mimic #mA{background:radial-gradient(circle at 35% 30%,#ffc247,#ff8a5c);border-color:#fff2c8;color:#4a2208;box-shadow:0 0 16px #ffb347aa}
+#ac .sm{display:flex;gap:8px}#ac .sm button{width:calc(var(--ps)*.3);min-width:50px;height:46px;border-radius:12px;font-size:17px}
+#ac button.p{transform:scale(.9);box-shadow:0 0 22px #5fd8ffcc}
+#rot{display:none;position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap;padding:5px 12px;border-radius:14px;font:600 11px Cinzel,serif;letter-spacing:.08em;background:#060a16ee;border:1px solid #ffc24788;color:#ffe9a8;pointer-events:auto}#rot u{text-decoration:none;margin-left:8px;opacity:.7}
+@media(orientation:portrait){body.mob:not(.norot) #rot{display:block}}
+@media(orientation:landscape){
+ body.mob #app{flex-direction:row}
+ body.mob #mc{display:contents}
+ body.mob #mc{--ps:clamp(104px,min(26vw,52vh),172px)}
+ body.mob #dp,body.mob #ac{--ps:clamp(104px,min(26vw,52vh),172px);align-self:flex-end;margin-bottom:max(10px,env(safe-area-inset-bottom));order:0;touch-action:none}
+ body.mob #dp{order:-1;margin-left:max(10px,env(safe-area-inset-left));margin-right:6px}
+ body.mob #ac{order:2;margin-right:max(10px,env(safe-area-inset-right));margin-left:6px}
+ body.mob #stage{order:1}
+}
+body.mob #stage:has(#ov.on)~#mc>*{opacity:.25;pointer-events:none}
+#wgl{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;background:#04070f;color:#e8f1ff;font:16px/1.5 Georgia,serif}
+@media(prefers-reduced-motion:reduce){#dv:before,.ph .mbt,.dvk,#dv.on,#mtut.on{animation:none!important;transition:none!important}}
+#dv{justify-content:flex-start}#dv>h1{margin-top:auto}#dv>.dvf{margin-bottom:auto}
+@media(max-height:480px){#dv{gap:8px}#dv h1{font-size:22px}.dvk{padding:12px 14px;gap:4px}.wasd{grid-template-columns:repeat(3,26px)}.wasd b{height:26px;font-size:12px}.ph{width:44px;height:74px}.dvk ul{font-size:12px;line-height:1.4}.dvk .go{padding:7px 18px;margin-top:4px}.dvk h3{font-size:17px}}
+body.mob #brand h1{font-size:16px}
+body.mob #mtop>div:first-child{display:none}
+/* HUD de-clutter on touch layouts */
+body.mob #btns button{font-size:11px;padding:5px 8px;min-height:32px}
+body.mob #top>div:last-child{display:none}
+body.mob #top,body.mob #app.mimic #mtop{left:max(128px,calc(env(safe-area-inset-left) + 128px));transform:none;max-width:max(120px,calc(100% - 128px - 232px))}
+@media(orientation:portrait){
+ body.mob #top,body.mob #app.mimic #mtop{display:none}
+ body.mob #btns,body.mob #app.mimic #btns{max-width:66vw}
+ body.mob #info{top:50px}body.mob #hint{top:96px}
+ body.mob .lab{font-size:9px;letter-spacing:.05em;padding:4px 8px;white-space:nowrap}
+ body.mob:not(.norot) .lab{bottom:40px}
+}
 </style>
-</head><body>
+<meta name="echobound-supabase-url" content="https://gbzzberxhehxfwkrxifx.supabase.co"><meta name="echobound-supabase-key" content="sb_publishable_RXCRNLBHDHbXKhtELlFOrQ_9kKrsfQu"></head><body>
 <div id="app">
 <div id="stage"><canvas id="c"></canvas><div id="rift"></div>
 <div class="ov" id="brand"><h1>ECHOBOUND</h1><p>Two Worlds. One Escape.</p><b id="lvn">LEVEL 1</b><b id="lvt">FIRST STEPS</b></div>
@@ -56,7 +159,7 @@
 <div class="ov lab" id="lr">← REALITY →</div><div class="ov lab" id="lm">← MIRROR DIMENSION →</div>
 <div class="ov" id="info"><div>MOVES <span id="mv">0</span> / <span id="mxv">0</span></div><div id="bar"><i></i></div><div id="eq"></div></div>
 <div id="fx"></div><div class="ov" id="hint"></div>
-<div id="ov"><h2 id="ot">PAUSED</h2><p id="os" style="margin:0;opacity:.8"></p><button id="b1">Resume</button><button id="b2">Restart</button><button id="b3">Level Select</button><button id="b4">Main Menu</button></div>
+<div id="ov"><h2 id="ot">PAUSED</h2><p id="os" style="margin:0;opacity:.8"></p><button id="b1">Resume</button><button id="b2">Restart</button><button id="b3">Level Select</button><button id="b4">Main Menu</button><button id="b5">🏆 Leaderboard</button></div>
 </div>
 <div id="hud">
 <div class="card"><div class="ic"><span class="fig bl"></span><span class="ar">⇆</span></div><div class="txt"><h3>MOVE</h3><p>Use Arrow Keys or WASD to move the active world.</p></div></div>
@@ -65,11 +168,13 @@
 <div class="card"><div class="ic"><span class="ar" style="font-size:20px">⇄</span></div><div class="txt"><h3>SWITCH WORLDS</h3><p>Press Space or Tab (or click a world) to steer the other one.</p></div></div>
 <div class="card"><div class="ic"><span class="ar" style="font-size:20px">▣</span></div><div class="txt"><h3>ACROSS THE RIFT</h3><p>Crates push in both worlds. Plates open gates and keys open doors in the other world.</p></div></div>
 <div class="card"><div class="ic"><span class="fig gd"></span><span class="ar" style="color:var(--go)">◎</span></div><div class="txt"><h3>GOAL</h3><p>Reach both exits before your moves run out. Never step into a gap — you will fall!</p></div></div>
-</div><div id="hud2"><div class="card"><div class="ic"><span class="ar" style="font-size:20px">⇆</span></div><div class="txt"><h3>MOVE</h3><p>Use Arrow Keys or WASD to move the hero.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">◌</span></div><div class="txt"><h3>ECHO FOLLOWS</h3><p>Your echo repeats each move a few steps later.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">•</span></div><div class="txt"><h3>WAIT</h3><p>Press Space to wait a turn. Waiting is recorded, so the echo can catch up.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">◎</span></div><div class="txt"><h3>TWO EXITS</h3><p>Gold exit for you, turquoise exit for your echo. Reach both before moves run out.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">▣</span></div><div class="txt"><h3>LITTLE HELPERS</h3><p>Crates push. Stand anything on a plate to open its gate.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">#</span></div><div class="txt"><h3>MIND THE GAPS</h3><p>Hero and echo both fall into gaps. Plan the echo’s path too.</p></div></div></div><div id="menu"><button class="sb"></button><header><h1>ECHOBOUND</h1><p>Two Worlds. One Escape.</p></header><div id="cards">
+</div><div id="hud2"><div class="card"><div class="ic"><span class="ar" style="font-size:20px">⇆</span></div><div class="txt"><h3>MOVE</h3><p>Use Arrow Keys or WASD to move the hero.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">◌</span></div><div class="txt"><h3>ECHO FOLLOWS</h3><p>Your echo repeats each move a few steps later.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">•</span></div><div class="txt"><h3>WAIT</h3><p>Press Space to wait a turn. Waiting is recorded, so the echo can catch up.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">◎</span></div><div class="txt"><h3>TWO EXITS</h3><p>Gold exit for you, turquoise exit for your echo. Reach both before moves run out.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">▣</span></div><div class="txt"><h3>LITTLE HELPERS</h3><p>Crates push. Stand anything on a plate to open its gate.</p></div></div><div class="card"><div class="ic"><span class="ar" style="font-size:20px">#</span></div><div class="txt"><h3>MIND THE GAPS</h3><p>Hero and echo both fall into gaps. Plan the echo’s path too.</p></div></div></div><div id="menu"><div class="tb"><button id="lbm">🏆 Leaderboard</button><span id="who"></span><button id="chn">Change name</button></div><button class="sb"></button><header><h1>ECHOBOUND</h1><p>Two Worlds. One Escape.</p></header><div id="cards">
 <article class="cc mi"><canvas id="cvm"></canvas><div class="cb"><small>PHASE 1 · START HERE</small><h2>MIMIC</h2><span class="bd">BEGINNER</span><p>Every step leaves an echo.</p><button id="pm">PLAY MIMIC</button></div></article>
 <article class="cc mr"><canvas id="cvr"></canvas><div class="cb"><small>PHASE 2 · A TOUGHER CHALLENGE</small><h2>MIRROR</h2><span class="bd">ADVANCED</span><p>Two worlds. Reversed paths. One escape.</p><button id="pr">PLAY MIRROR</button></div></article>
 </div><p class="hint">New here? Begin with MIMIC, then take on MIRROR.</p></div>
-<div id="lvsel"><button class="sb"></button><h2 id="lst"></h2><p id="lss"></p><div id="lsg"></div><button id="lsb">← Main Menu</button></div></div>
+<div id="lvsel"><button class="sb"></button><h2 id="lst"></h2><p id="lss"></p><div id="lsg"></div><div class="lsr"><button id="lsl">🏆 Leaderboard</button><button id="lsb">← Main Menu</button></div></div>
+<div id="nm"><h1>ECHOBOUND</h1><p>Two Worlds. One Escape.</p><div class="nbox"><label for="nin">ENTER YOUR NAME</label><input id="nin" maxlength="16" autocomplete="nickname" spellcheck="false" placeholder="Your name"><button id="ngo">CONTINUE</button><small id="nerr"></small></div></div>
+<div id="lb"><h2>LEADERBOARD</h2><div id="lbt"></div><div id="lbl"></div><p id="lbn"></p><div id="lbw"><table id="lbtab"></table></div><p id="lbs"></p><button id="lbb">← Back</button></div></div>
 <script type="module">(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))n(i);new MutationObserver(i=>{for(const r of i)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&n(o)}).observe(document,{childList:!0,subtree:!0});function e(i){const r={};return i.integrity&&(r.integrity=i.integrity),i.referrerPolicy&&(r.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?r.credentials="include":i.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(i){if(i.ep)return;i.ep=!0;const r=e(i);fetch(i.href,r)}})();/**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -3183,7 +3288,7 @@ function moveR(dx,dy){if(state!=='play')return;const t=step(P,S,act?-dx:dx,dy,tr
  if(won(S)){state='won';setTimeout(win,450)}
  else if(moves>=L.mx){state='lost';shake=.3;setTimeout(()=>lose('OUT OF MOVES','You used all '+L.mx+' moves.'),600)}}
 function undoR(){if(state!=='play'||!hist.length)return;S=hist.pop();moves--;hud();sync()}
-function win(){const mi=mode==='mimic',n=mi?MLV.length:LV.length,last=li==n-1;saveProg();delete HR[mode+li];
+function win(){const mi=mode==='mimic',n=mi?MLV.length:LV.length,last=li==n-1;saveProg();delete HR[mode+li];lbWin();
  ot.textContent=last?(mi?'ALL ECHOES HOME':'ALL WORLDS ESCAPED'):'LEVEL COMPLETE';os.textContent=(mi?'Hero and echo made it in ':'Both exits reached in ')+moves+' moves.';
  b2.style.display='';b1.textContent=last?'Main Menu':'Next Level';b1.onclick=last?toMenu:()=>go(li+1);ov.classList.add('on')}
 function menu(){if(state!=='play'&&state!=='paused')return;if(state==='paused'){resume();return}state='paused';b2.style.display='';ot.textContent='PAUSED';os.textContent=L.n+' — '+L.t;b1.textContent='Resume';b1.onclick=resume;ov.classList.add('on')}
@@ -3193,18 +3298,22 @@ const restart=()=>{AU.retry();go(li)},move=(dx,dy)=>mode==='mimic'?mMoveKey(dx,d
 b2.onclick=restart;bR.onclick=restart;bM.onclick=menu;bS.onclick=switchWorld;bU.onclick=undo;
 addEventListener('click',e=>{if(e.target.tagName=='BUTTON')e.target.blur()});
 c.addEventListener('pointerdown',e=>{const b=c.getBoundingClientRect();if(state==='play'&&mode==='mirror'&&!scr)setAct(e.clientX-b.left<b.width/2?0:1)});
-addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(k=='m'){AU.mute();return}if(k=='h'&&!scr){hint();return}if(scr){if(k=='escape'&&scr=='levels')toMenu();return}if(mode==='mimic'&&(k==' '||k=='tab')){e.preventDefault();if(k==' ')mAct('w');return}
+function handleKey(k,e){if(k=='m'){AU.mute();return}if(k=='h'&&!scr){hint();return}if(scr){if(k=='escape'){if(scr=='levels')toMenu();else if(scr=='lb')lbBack()}return}if(mode==='mimic'&&(k==' '||k=='tab')){e.preventDefault();if(k==' ')mAct('w');return}
  const m={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]}[k];
- if(m){e.preventDefault();move(...m)}else if(k==' '||k=='tab'){e.preventDefault();switchWorld()}else if(k=='z'||k=='u'||k=='backspace'){e.preventDefault();undo()}else if(k=='r')restart();else if(k=='escape'||k=='p')menu()});
-const ren=new THREE.WebGLRenderer({canvas:c,antialias:true});ren.shadowMap.enabled=true;ren.setScissorTest(true);
+ if(m){e.preventDefault();move(...m)}else if(k==' '||k=='tab'){e.preventDefault();switchWorld()}else if(k=='z'||k=='u'||k=='backspace'){e.preventDefault();undo()}else if(k=='r')restart();else if(k=='escape'||k=='p')menu()}
+addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(dvOpen)return;handleKey(e.key.toLowerCase(),e)});
+const LITE=(()=>{let m=false;try{m=localStorage.getItem('echobound.controls')==='mobile'}catch(e){}try{return m||matchMedia('(hover:none) and (pointer:coarse)').matches}catch(e){return m}})();
+let ren;try{ren=new THREE.WebGLRenderer({canvas:c,antialias:!LITE})}catch(e1){try{ren=new THREE.WebGLRenderer({canvas:c,antialias:false})}catch(e2){document.body.insertAdjacentHTML('beforeend','<div id="wgl"><div><h2>WebGL is unavailable</h2><p>ECHOBOUND needs WebGL. Try Chrome, enable hardware acceleration, or restart your browser.</p></div></div>');throw e2}}
+ren.shadowMap.enabled=true;ren.setScissorTest(true);
 const cam=new THREE.PerspectiveCamera(34,1,.1,100);let cw=1,ch=1;
-function size(){cw=stage.clientWidth;ch=stage.clientHeight;ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.setSize(cw,ch,false)}
+function size(){cw=stage.clientWidth;ch=stage.clientHeight;ren.setPixelRatio(Math.min(devicePixelRatio,LITE?1.5:2));ren.setSize(cw,ch,false)}
 addEventListener('resize',size);size();
 const clk=new THREE.Clock();
 (function loop(){requestAnimationFrame(loop);const dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;shake=Math.max(0,shake-dt);
- if(scr==='menu'){drawMenu(t,dt);return}if(scr==='levels')return;if(mode==='mimic'){mLoop(dt,t);return}
+ if(scr==='menu'){drawMenu(t,dt);return}if(scr==='levels'||scr==='lb'||scr==='name')return;if(mode==='mimic'){mLoop(dt,t);return}
  if(state==='falling'){ft+=dt;if(ft>1.1)lose('YOU FELL','Step into a gap in either world and you are gone.')}
  const hw=Math.floor(cw/2),asp=hw/ch,dist=17*Math.max(1,1/asp*.95);
+ W.forEach(q=>{const f=Math.max(1,dist/17);q.s.fog.near=14*f;q.s.fog.far=42*f});
  cam.aspect=asp;cam.position.set(0,dist*.72,dist*.7);cam.lookAt(0,-.2,.2);cam.updateProjectionMatrix();
  const tg=[[S.pc-3,S.pr-3],[C-1-S.pc-3,S.pr-3]],k=Math.min(1,dt*14);
  W.forEach((w,i)=>{const a=w.ac;a.position.x+=(tg[i][0]-a.position.x)*Math.min(1,dt*18);a.position.z+=(tg[i][1]-a.position.z)*Math.min(1,dt*18);
@@ -3247,7 +3356,7 @@ const mMoveKey=(dx,dy)=>mAct(dx<0?'l':dx>0?'r':dy<0?'u':'d');
 const mUndo=()=>{if(state!=='play'||!hist.length)return;MS=hist.pop();moves--;hud();mSync()};
 function mLoop(dt,t){shake=Math.max(0,shake-dt);
  if(state==='falling'){ft+=dt;if(ft>1.1)lose(mfall==1?'YOU FELL':'YOUR ECHO FELL','Mind the gaps — your echo repeats your moves too.')}
- const w=mw,asp=cw/ch,dist=17*Math.max(1,1/asp*.95),k=Math.min(1,dt*14);
+ const w=mw,asp=cw/ch,dist=17*Math.max(1,1/asp*.95),k=Math.min(1,dt*14);{const f=Math.max(1,dist/17);w.s.fog.near=14*f;w.s.fog.far=42*f}
  cam.aspect=asp;cam.position.set(0,dist*.72,dist*.7);cam.lookAt(0,-.2,.2);cam.updateProjectionMatrix();
  const fig=(a,p,dead,ph)=>{a.position.x+=(p[0]-3-a.position.x)*Math.min(1,dt*18);a.position.z+=(p[1]-3-a.position.z)*Math.min(1,dt*18);
   if(dead){const u=Math.max(0,ft-.12);a.position.y=-u*u*14;a.rotation.z+=dt*7;a.rotation.x+=dt*4;a.scale.setScalar(Math.max(.2,1-u*.6))}
@@ -3283,7 +3392,7 @@ function showLevels(m){AU.music(m);mode=m;scr='levels';state='menu';ov.classList
 function toLevels(){showLevels(mode==='mimic'?'mimic':'mirror')}
 function toMenu(){AU.music('menu');scr='menu';state='menu';ov.classList.remove('on');lvsel.classList.remove('on');app.className='';menuEl.classList.add('on')}
 $('lsb').onclick=toMenu;b3.onclick=toLevels;b4.onclick=toMenu;
-initMenu();menuEl.classList.add('on');AU.music('menu');
+initMenu();
 
 
 // ===== Hints: 3 per level (not refilled by restart). Solves from the CURRENT position and shows the next 3 moves. =====
@@ -3304,5 +3413,105 @@ function hint(){if(state!=='play'||scr)return;const k=mode+li;if(HR[k]===undefin
  showHint('Next:  '+txt,true);hintLabel();$('hint').classList.add('on');showHint('Next:  '+txt+'     ('+HR[k]+' left)',true)}
 $('bH').onclick=hint;
 
+// ===== Player name + per-level leaderboards (fewest moves wins). Shared via /api when the server is present, otherwise per-device. =====
+const API=(document.querySelector('meta[name="echobound-api"]')||{}).content||'';const SBU=((document.querySelector('meta[name="echobound-supabase-url"]')||{}).content||'').trim().replace(/\/$/,''),SBK=((document.querySelector('meta[name="echobound-supabase-key"]')||{}).content||'').trim(),USB=!!(SBU&&SBK);
+let SHARED=null,PLAYER='',lbPrev='menu',lbC='mimic',lbL=0;
+try{PLAYER=localStorage.getItem('echobound.player')||''}catch(e){}
+const cleanName=s=>String(s||'').normalize('NFC').replace(/[^\p{L}\p{N} _.'-]/gu,'').replace(/\s+/g,' ').trim().slice(0,16);
+async function jf(url,opt){const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),4000);try{const r=await fetch(API+url,{...opt,signal:ctl.signal,cache:'no-store'});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(t)}}
+// Supabase RPC (publishable/anon key only; the table itself is locked by RLS)
+async function sb(fn,body){const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),5000),h={'Content-Type':'application/json',apikey:SBK};if(SBK.startsWith('eyJ'))h.Authorization='Bearer '+SBK;
+ try{const r=await fetch(SBU+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body),signal:ctl.signal});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(t)}}
+async function lbPing(force){if(SHARED!==null&&!force)return SHARED;try{await jf('/api/ping');SHARED=true}catch(e){SHARED=false}return SHARED}
+const sortRows=r=>r.slice().sort((a,b)=>a.moves-b.moves||a.ts-b.ts),lcn=s=>s.toLowerCase();
+const lbLocal=()=>{try{return JSON.parse(localStorage.getItem('echobound.lb')||'{}')}catch(e){return{}}};
+function localSubmit(c,l,name,mv){const all=lbLocal(),k=c+':'+l,rows=all[k]=all[k]||[],i=rows.findIndex(r=>lcn(r.name)===lcn(name));let imp=false;
+ if(i<0){rows.push({name,moves:mv,ts:Date.now()});imp=true}else if(mv<rows[i].moves){rows[i]={name,moves:mv,ts:Date.now()};imp=true}
+ try{localStorage.setItem('echobound.lb',JSON.stringify(all))}catch(e){}
+ const s=sortRows(rows),j=s.findIndex(r=>lcn(r.name)===lcn(name));return{rank:j+1,total:s.length,best:s[j].moves,improved:imp}}
+function localGet(c,l,name){const s=sortRows(lbLocal()[c+':'+l]||[]),i=name?s.findIndex(r=>lcn(r.name)===lcn(name)):-1;return{rows:s.slice(0,20).map(r=>({name:r.name,moves:r.moves})),total:s.length,me:i>=0?{rank:i+1,moves:s[i].moves}:null}}
+async function lbSubmit(c,l,mv){if(!PLAYER)return null;
+ if(USB){try{const r=await sb('submit_score',{c,l,p_name:PLAYER,mv});r.shared=true;return r}catch(e){}}
+ if(await lbPing()){try{const r=await jf('/api/scores',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({c,l,name:PLAYER,moves:mv})});r.shared=true;return r}catch(e){SHARED=false}}
+ const r=localSubmit(c,l,PLAYER,mv);r.shared=false;return r}
+async function lbFetch(c,l){if(USB){try{const r=await sb('get_scores',{c,l,p_name:PLAYER});r.shared=true;return r}catch(e){}}
+ if(await lbPing(true)){try{const r=await jf('/api/scores?c='+c+'&l='+l+'&limit=20&name='+encodeURIComponent(PLAYER));r.shared=true;return r}catch(e){SHARED=false}}
+ const r=localGet(c,l,PLAYER);r.shared=false;return r}
+function lbWin(){const c=mode,l=li;lbSubmit(c,l,moves).then(r=>{if(!r||!ov.classList.contains('on')||mode!==c||li!==l||state!=='won')return;
+ os.textContent+=' · '+(r.improved?'New best! ':'Your best: '+r.best+' moves · ')+'Rank #'+r.rank+' of '+r.total+(r.shared?'':' (this device)')})}
+// ---- screens ----
+const nmEl=$('nm'),lbEl=$('lb');
+function showName(){scr='name';menuEl.classList.remove('on');lvsel.classList.remove('on');nmEl.classList.add('on');$('nin').value=PLAYER;$('nerr').textContent='';AU.music('menu');setTimeout(()=>$('nin').focus(),60)}
+function nameGo(){const n=cleanName($('nin').value);if(!n){$('nerr').textContent='Please enter a name (letters, numbers or spaces).';return}
+ PLAYER=n;try{localStorage.setItem('echobound.player',n)}catch(e){}$('who').textContent='Playing as '+n;nmEl.classList.remove('on');scr='menu';menuEl.classList.add('on')}
+$('ngo').onclick=nameGo;$('nin').addEventListener('keydown',e=>{if(e.key==='Enter')nameGo()});$('chn').onclick=showName;
+function lbOpen(c,l,prev){lbPrev=prev;lbC=c;lbL=l;scr='lb';lbEl.classList.add('on');lbRender()}
+function lbBack(){lbEl.classList.remove('on');scr=lbPrev}
+async function lbRender(){const c=lbC,l=lbL,mi=c==='mimic',n=mi?MLV.length:LV.length;
+ $('lbt').innerHTML='';['mimic','mirror'].forEach(m=>{const b=document.createElement('button');b.textContent=m.toUpperCase();b.className='lbtab'+(m===c?' sel '+m:'');b.onclick=()=>{lbC=m;lbL=0;lbRender()};$('lbt').appendChild(b)});
+ $('lbl').innerHTML='';for(let i=0;i<n;i++){const b=document.createElement('button');b.textContent=i+1;b.className='lbchip'+(i===l?' sel':'');b.onclick=()=>{lbL=i;lbRender()};$('lbl').appendChild(b)}
+ $('lbn').textContent='LEVEL '+(l+1)+' · '+(mi?MLV[l].n:LV[l].t)+'  —  fewest moves wins';
+ const tb=$('lbtab');tb.innerHTML='<tr><th>#</th><th>PLAYER</th><th>MOVES</th></tr><tr><td colspan="3" class="lbmsg">Loading…</td></tr>';
+ const r=await lbFetch(c,l);if(c!==lbC||l!==lbL||scr!=='lb')return;
+ tb.innerHTML='<tr><th>#</th><th>PLAYER</th><th>MOVES</th></tr>';
+ const row=(rk,nm,mv,me)=>{const tr=document.createElement('tr');if(me)tr.className='me';[rk<=3?['🥇','🥈','🥉'][rk-1]:rk,nm,mv].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)};
+ if(!r.rows.length){tb.insertAdjacentHTML('beforeend','<tr><td colspan="3" class="lbmsg">No scores yet — be the first!</td></tr>')}
+ r.rows.forEach((x,i)=>row(i+1,x.name,x.moves,lcn(x.name)===lcn(PLAYER)));
+ if(r.me&&r.me.rank>r.rows.length){tb.insertAdjacentHTML('beforeend','<tr><td colspan="3" class="lbmsg">…</td></tr>');row(r.me.rank,PLAYER,r.me.moves,true)}
+ $('lbs').textContent=(r.shared?'Online leaderboard · ':'Offline leaderboard — scores on this device only · ')+r.total+' player'+(r.total===1?'':'s')+' on this level'}
+$('lbb').onclick=lbBack;$('lbm').onclick=()=>lbOpen('mimic',0,'menu');$('lsl').onclick=()=>lbOpen(mode,0,'levels');$('b5').onclick=()=>lbOpen(mode,li,null);
+$('who').textContent=PLAYER?'Playing as '+PLAYER:'';
+// ===== Controls: device selection, shared input layer, touch controller (added) =====
+// All input (keyboard AND touch) goes through handleKey(), the same function the keyboard always used.
+const CK='echobound.controls',TK='echobound.mtut';
+const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+let ctl=null,dvOpen=false;
+const FAKE={preventDefault(){}},fire=k=>{if(!dvOpen)handleKey(k,FAKE)};
+const guessMode=()=>{try{const ua=navigator.userAgent||'',coarse=matchMedia('(hover:none) and (pointer:coarse)').matches,ipad=/Macintosh/.test(ua)&&navigator.maxTouchPoints>1;return coarse||ipad||/Android|iPhone|iPad|iPod|Mobile/i.test(ua)?'mobile':'pc'}catch(e){return'pc'}};
+const mk=h=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstElementChild};
+const dv=mk(`<div id="dv" role="dialog" aria-modal="true" aria-labelledby="dvt"><button id="dvx" aria-label="Close">✕</button><h1>ECHOBOUND</h1><h2 id="dvt">HOW DO YOU WANT TO PLAY?</h2><div class="dvc">
+<button class="dvk pc" id="dvp" type="button"><em class="rec">RECOMMENDED FOR YOUR DEVICE</em><small>KEYBOARD + MOUSE</small><div class="wasd"><b class="w">W</b><b class="a">A</b><b class="s">S</b><b class="d">D</b></div><h3>PC / DESKTOP</h3><ul><li>Arrow keys or WASD to move</li><li>Space: switch worlds (Mirror) · wait (Mimic)</li><li>Z undo · R restart · H hint · Esc menu</li><li>Click a world to steer it (Mirror)</li></ul><span class="go">PLAY WITH KEYBOARD</span></button>
+<button class="dvk mb" id="dvm" type="button"><em class="rec">RECOMMENDED FOR YOUR DEVICE</em><small>TOUCHSCREEN CONTROLS</small><div class="ph"><div class="sc"></div><i class="mdp"></i><i class="mbt"></i></div><h3>MOBILE / ANDROID</h3><ul><li>On-screen D-pad: slide to turn, hold to keep moving</li><li>SWITCH / WAIT, UNDO and RESET buttons</li><li>Tap a world to steer it · best in landscape</li></ul><span class="go">PLAY WITH TOUCH</span></button></div>
+<p class="dvf">You can change this any time from the pause menu or the main menu.</p></div>`);
+const tut=mk(`<div id="mtut" role="dialog" aria-modal="true"><div class="tc"><h3>TOUCH GUIDE</h3><ul><li><b>◀ ▲ ▼ ▶ PAD</b> Move on the grid. Slide your thumb to turn; hold to keep walking.</li><li><b>⇄ SWITCH</b> (Mirror) steer the other world, or tap a world. <b>⏸ WAIT</b> (Mimic) stand still so your echo can catch up.</li><li><b>↶ UNDO · ↻ RESET</b> Plan carefully. Every move counts.</li></ul><button id="mtg" type="button">GOT IT</button></div></div>`);
+const mc=mk(`<div id="mc" aria-label="Touch controls"><div id="dp"><i class="dk" data-d="u">▲</i><i class="dk" data-d="l">◀</i><i class="dk" data-d="r">▶</i><i class="dk" data-d="d">▼</i><b class="dcen"></b></div><div id="ac"><button id="mA" type="button"><b class="sw">⇄</b><b class="wt">⏸</b><span class="sw">SWITCH</span><span class="wt">WAIT</span></button><div class="sm"><button id="mU" type="button"><b>↶</b><span>UNDO</span></button><button id="mR" type="button"><b>↻</b><span>RESET</span></button><button id="mH" type="button"><b>?</b><span>HELP</span></button></div></div><div id="rot">↻ Rotate your phone for a bigger view <u id="rotx">✕</u></div></div>`);
+document.body.append(dv,tut);app.appendChild(mc);
+mc.addEventListener('contextmenu',e=>e.preventDefault());
+// --- D-pad: one touch surface, 4 sectors + dead zone. Fires once on press, repeats while held. ---
+const dp=$('dp'),dks=[...dp.querySelectorAll('.dk')],KM={u:'arrowup',d:'arrowdown',l:'arrowleft',r:'arrowright'};
+let dpId=null,dpDir=null,rT=0,rI=0;
+const dirAt=e=>{const r=dp.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;if(Math.hypot(x,y)<r.width*.13)return null;return Math.abs(x)>Math.abs(y)?(x>0?'r':'l'):(y>0?'d':'u')};
+function dpStop(){dpId=null;dpDir=null;clearTimeout(rT);clearInterval(rI);dks.forEach(k=>k.classList.remove('p'))}
+function dpSet(d){if(d===dpDir)return;dpDir=d;clearTimeout(rT);clearInterval(rI);dks.forEach(k=>k.classList.toggle('p',k.dataset.d===d));if(!d)return;
+ fire(KM[d]);rT=setTimeout(()=>{rI=setInterval(()=>{if(dpDir&&!document.hidden&&ctl==='mobile')fire(KM[dpDir]);else dpStop()},180)},320)}
+dp.addEventListener('pointerdown',e=>{if(dpId!==null)return;e.preventDefault();dpId=e.pointerId;try{dp.setPointerCapture(e.pointerId)}catch(_){}dpSet(dirAt(e))});
+dp.addEventListener('pointermove',e=>{if(e.pointerId===dpId)dpSet(dirAt(e))});
+['pointerup','pointercancel','lostpointercapture'].forEach(t=>dp.addEventListener(t,e=>{if(e.pointerId===dpId)dpStop()}));
+addEventListener('blur',dpStop);addEventListener('pagehide',dpStop);document.addEventListener('visibilitychange',()=>{if(document.hidden)dpStop()});
+// --- Action buttons: fire once per press (no auto-repeat, so Wait/Undo/Switch can't double up) ---
+function press(el,fn){el.addEventListener('pointerdown',e=>{e.preventDefault();try{el.setPointerCapture(e.pointerId)}catch(_){}el.classList.add('p');fn()});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(t=>el.addEventListener(t,()=>el.classList.remove('p')))}
+press($('mA'),()=>fire(' '));press($('mU'),()=>fire('z'));press($('mR'),()=>fire('r'));press($('mH'),()=>showTut());
+$('rotx').addEventListener('pointerdown',e=>{e.preventDefault();document.body.classList.add('norot')});
+// --- mode switching (never touches game state, so campaign progress is kept) ---
+function applyMode(m){ctl=m;const mob=m==='mobile';document.body.classList.toggle('mob',mob);document.documentElement.style.overscrollBehavior=mob?'none':'';dpStop();
+ requestAnimationFrame(()=>{size();requestAnimationFrame(size)})}
+function showDV(){dvOpen=true;dpStop();const g=guessMode();$('dvp').classList.toggle('rc',g==='pc');$('dvm').classList.toggle('rc',g==='mobile');$('dvx').style.display=ctl?'block':'none';dv.classList.add('on');setTimeout(()=>(ctl==='mobile'?$('dvm'):$('dvp')).focus(),50)}
+function hideDV(){dvOpen=false;dv.classList.remove('on')}
+function pick(m){lsSet(CK,m);applyMode(m);hideDV();if(m==='mobile'&&!lsGet(TK))showTut();else if(m==='pc'&&scr==='name')setTimeout(()=>$('nin').focus(),60)}
+function showTut(){tut.classList.add('on')}
+$('mtg').onclick=()=>{lsSet(TK,'1');tut.classList.remove('on')};
+$('dvp').onclick=()=>pick('pc');$('dvm').onclick=()=>pick('mobile');$('dvx').onclick=hideDV;
+dv.addEventListener('keydown',e=>{if(e.key==='Escape'&&ctl){e.preventDefault();hideDV()}});
+// "Change Controls" in the pause menu and the main menu
+const cb=()=>{const b=document.createElement('button');b.type='button';b.textContent='🎮 Change Controls';b.onclick=showDV;return b};
+ov.appendChild(cb());const tb=document.querySelector('#menu>.tb');if(tb)tb.appendChild(cb());
+// keep renderer sized to the stage even when layout changes without a window resize (mode switch, rotate, URL bar)
+try{new ResizeObserver(()=>size()).observe(stage)}catch(e){}
+addEventListener('orientationchange',()=>setTimeout(size,250));
+// startup: remembered choice (validated) or ask
+{const s=lsGet(CK);if(s==='pc'||s==='mobile')applyMode(s);else showDV()}
+
+showName();
 })({Group:Ie,Mesh:Dt,MeshStandardMaterial:wn,MeshBasicMaterial:vn,BoxGeometry:ge,TorusGeometry:va,OctahedronGeometry:Cm,ConeGeometry:gr,SphereGeometry:Im,CircleGeometry:hl,PlaneGeometry:Xa,PointLight:Pr,Scene:Hs,Fog:Tr,HemisphereLight:Ml,DirectionalLight:Tl,BufferGeometry:It,Points:cl,PointsMaterial:ks,WebGLRenderer:Ut,PerspectiveCamera:ue,Clock:yg,Color:ct,Float32BufferAttribute:Tt,AdditiveBlending:vs});
 </script></body></html>
